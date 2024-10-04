@@ -1,0 +1,81 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 800,
+  "height": 600,
+  "title": "Tourist's transportation mode in Malaysia",
+  "data": {
+    "url": "https://raw.githubusercontent.com/Vortwx/FIT3179-W10/refs/heads/main/data/Tourist_Transportation_Mode.csv"
+  },
+  "params": [
+    {
+      "name": "transport_mode",
+      "bind": {
+        "input": "select",
+        "options": [
+          null,
+          "Air",
+          "Land",
+          "Sea",
+          "Rail"
+        ],
+        "labels":[
+          "All",
+          "Air",
+          "Land",
+          "Sea",
+          "Rail"
+        ],
+        "name": "Transportation Mode:"
+      }
+    }
+  ],
+  "transform": [{"filter":"transport_mode == null || datum.Transportation == transport_mode"}],
+  "layer": [
+    {
+      "mark": "circle",
+      "encoding": {
+        "x": {
+          "field": "Year",
+          "type": "ordinal",
+          "axis": {"tickCount":7}
+        },
+        "y": {
+          "field": "Transportation",
+          "type":"nominal",
+          "axis": {"tickCount":6}
+        },
+        "size": {
+          "field": "Percentage",
+          "type": "quantitative"
+        },
+        "tooltip": [
+          {"field": "Year", "type": "ordinal"},
+          {"field": "Transportation", "type": "nominal"},
+          {"field": "Percentage","type": "quantitative", "format": ".2f"}
+        ]
+      }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "color": "black",
+        "align": "left",
+        "dy": 20,
+        "dx": -80
+      },
+      "encoding": {
+        "x": {"datum": "2021"},
+        "text": {"value": "Down to 0%, affected by pandemic"},
+        "size": {"value": 12},
+        "opacity":{
+          "condition": {
+            "test": "transport_mode == null || transport_mode == 'Rail'",
+            "value": 1
+          },
+          "value": 0
+        }
+      }
+    }
+
+  ]
+}
