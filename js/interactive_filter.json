@@ -2,7 +2,10 @@
   "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
   "width": 800,
   "height": 450,
-  "title": "Tourist's transportation mode in Malaysia",
+  "title": {
+    "text": "Tourist's transportation mode in Malaysia",
+    "fontSize": 20
+  },
   "data": {
     "url": "https://raw.githubusercontent.com/Vortwx/FIT3179-W10/refs/heads/main/data/Tourist_Transportation_Mode.csv"
   },
